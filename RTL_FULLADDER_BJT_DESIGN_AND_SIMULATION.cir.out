@@ -1,0 +1,62 @@
+* c:\users\lenovo\esim-workspace\rtl_full_adder_design_and_simulation\rtl_full_adder_design_and_simulation.cir
+
+.include BC547B.lib
+q1 net-_q1-pad1_ net-_q1-pad2_ gnd BC547B
+r2  va net-_q1-pad2_ 10k
+r1  vb net-_q1-pad2_ 10k
+r3  net-_q1-pad1_ net-_r12-pad2_ 1k
+q3 net-_q3-pad1_ net-_q3-pad2_ gnd BC547B
+r8  net-_q1-pad1_ net-_q3-pad2_ 10k
+r7  vb net-_q3-pad2_ 10k
+r9  net-_q3-pad1_ net-_r12-pad2_ 1k
+q2 net-_q2-pad1_ net-_q2-pad2_ gnd BC547B
+r5  va net-_q2-pad2_ 10k
+r4  net-_q1-pad1_ net-_q2-pad2_ 10k
+r6  net-_q2-pad1_ net-_r12-pad2_ 1k
+q4 net-_q4-pad1_ net-_q4-pad2_ gnd BC547B
+r11  net-_q2-pad1_ net-_q4-pad2_ 10k
+r10  net-_q3-pad1_ net-_q4-pad2_ 10k
+r12  net-_q4-pad1_ net-_r12-pad2_ 1k
+q5 net-_q5-pad1_ net-_q5-pad2_ gnd BC547B
+r14  net-_q4-pad1_ net-_q5-pad2_ 10k
+r13  vc net-_q5-pad2_ 10k
+r15  net-_q5-pad1_ net-_r12-pad2_ 1k
+q6 net-_q6-pad1_ net-_q6-pad2_ gnd BC547B
+r17  net-_q4-pad1_ net-_q6-pad2_ 10k
+r16  net-_q5-pad1_ net-_q6-pad2_ 10k
+r18  net-_q6-pad1_ net-_r12-pad2_ 1k
+q7 net-_q7-pad1_ net-_q7-pad2_ gnd BC547B
+r20  net-_q5-pad1_ net-_q7-pad2_ 10k
+r19  vc net-_q7-pad2_ 10k
+r21  net-_q7-pad1_ net-_r12-pad2_ 1k
+q8 sum net-_q8-pad2_ gnd BC547B
+r23  net-_q6-pad1_ net-_q8-pad2_ 10k
+r22  net-_q7-pad1_ net-_q8-pad2_ 10k
+r24  sum net-_r12-pad2_ 1k
+q9 carry net-_q9-pad2_ gnd BC547B
+r26  net-_q5-pad1_ net-_q9-pad2_ 10k
+r25  net-_q1-pad1_ net-_q9-pad2_ 10k
+r27  carry net-_r12-pad2_ 1k
+v4 net-_r12-pad2_ gnd  dc 5V
+v1  va gnd pulse(0v 5V 0us 1us 1us 1ms 4ms)
+v2  vb gnd pulse(0v 5v 0us 1us 1us 2ms 4ms)
+v3  vc gnd pulse(0v 5v 0v 1us 1us 3ms 4ms)
+* u1  va plot_v1
+* u2  vb plot_v1
+* u3  vc plot_v1
+* u4  sum plot_v1
+* u5  carry plot_v1
+.tran 1e-03 20e-03 0e-03
+
+* Control Statements 
+.control
+run
+print allv > plot_data_v.txt
+print alli > plot_data_i.txt
+plot v(va)
+plot v(vb)
+plot v(vc)
+plot v(sum)
+plot v(carry)
+.endc
+.end
